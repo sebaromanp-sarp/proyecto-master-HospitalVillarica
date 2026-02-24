@@ -32,7 +32,7 @@
 - **Entrada (ejemplo)**:
 
 ```
-CAMILA LORENA ROMAN PILLADO	16766300-1		FONASA - D	NO	NO	38 A 2 M 3 D	
+CRISTIAN ALEJANDRO CAMPOS IRRIBARRA	15764390-1		FONASA - D	NO	NO	38 A 2 M 3 D	( ESOS "NO" SON PORQUE VIENEN DE UN COPIAR PEGAR DE DESORDENADO PERO NUESTRO SISTEMA LOS OMITE )
 ```
 
 - **Salida esperada**: JSON con `nombre`, `apellido_paterno_paciente`, `apellido_materno_paciente`, `rut`, `prevision`, `edad`, `fechanacimiento`, `complejidad`.
