@@ -1,0 +1,2725 @@
+{
+  "name": "Proyecto Hospital Villarica  V4.0 copy",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "🏥 Ingreso de Pacientes - Hospital Villarrica",
+        "formDescription": "👨‍⚕️ Bienvenido al sistema de registro de pacientes. Por favor, ingrese a su intranet SSASUR, busque los datos del paciente en HCE y cópielos en el campo de texto a continuación. El sistema extraerá automáticamente la información necesaria: nombre, RUT, previsión, edad y complejidad.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "📋 Datos del Paciente (copiar y pegar desde HCE)",
+              "fieldType": "textarea",
+              "fieldName": "datos_paciente",
+              "placeholder": "📝 Ejemplo: Juan Pérez, RUT 12.345.678-9, Fonasa, 45 años, Alta complejidad",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "👨‍⚕️ Nombre del Médico Solicitante",
+              "fieldName": "nombre_medico",
+              "placeholder": "🩺 Dr. María González",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "🆔 RUT del Médico",
+              "fieldName": "rut_medico",
+              "placeholder": "15600430-7"
+            },
+            {
+              "fieldLabel": "🔬 Seleccionar Examen(es) a Realizar",
+              "fieldType": "checkbox",
+              "fieldName": "examenes_seleccionados",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "exam_01 | Test multidrogas en orina"
+                  },
+                  {
+                    "option": "exam_02 \n Solicitud de Examenes"
+                  },
+                  {
+                    "option": "exam_03 | Solicitud de Biopsia"
+                  },
+                  {
+                    "option": "exam_04 | Examen de Test Rápido de Microrganismos Respiratorio"
+                  },
+                  {
+                    "option": "exam_05 | Examen Biologia Molecular"
+                  },
+                  {
+                    "option": "exam_06 | Formulario VIH"
+                  },
+                  {
+                    "option": "exam_07 | Formulario TBC"
+                  },
+                  {
+                    "option": "exam_08 | Formulario HANTA"
+                  },
+                  {
+                    "option": "exam_09 | Solicitud de TC"
+                  },
+                  {
+                    "option": "exam_10 |Solicitud de Radiografía"
+                  },
+                  {
+                    "option": "exam_11 | Solicitud de RNM"
+                  },
+                  {
+                    "option": "exam_12 | Solicitud De Transfusión"
+                  },
+                  {
+                    "option": "exam_13 | Solicitud de Reserva de Hemocomponentes"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "customCss": "body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; } .form-container { background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 40px; max-width: 800px; margin: 40px auto; } .form-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #667eea; } .form-header h1 { color: #2d3748; font-size: 28px; margin-bottom: 10px; } .form-header p { color: #4a5568; font-size: 14px; line-height: 1.6; } .form-field { margin-bottom: 25px; } .form-field label { display: block; color: #2d3748; font-weight: 600; margin-bottom: 8px; font-size: 15px; } .form-field input, .form-field textarea { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; transition: all 0.3s ease; background: #f7fafc; } .form-field input:focus, .form-field textarea:focus { border-color: #667eea; outline: none; background: white; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); } .form-field textarea { min-height: 100px; resize: vertical; } .checkbox-group { background: #f7fafc; padding: 20px; border-radius: 10px; border: 2px solid #e2e8f0; } .checkbox-group label { display: flex; align-items: center; padding: 10px; margin: 5px 0; background: white; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; } .checkbox-group label:hover { background: #edf2f7; transform: translateX(5px); } .checkbox-group input[type=\"checkbox\"] { margin-right: 12px; width: 20px; height: 20px; cursor: pointer; } button[type=\"submit\"] { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); } button[type=\"submit\"]:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6); } .medical-icon { display: inline-block; margin-right: 8px; }"
+        }
+      },
+      "id": "51583f62-8f04-43a9-afe9-b56481064e60",
+      "name": "Formulario Ingreso Pacientes",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        192,
+        1280
+      ],
+      "webhookId": "b639b960-2b50-481c-a19f-53f4aea73d17",
+      "alwaysOutputData": false,
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "datos_paciente_texto",
+              "value": "={{ $json.datos_paciente }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "nombre_medico",
+              "value": "={{ $json.nombre_medico }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "rut_medico",
+              "value": "={{ $json.rut_medico }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "examenes_seleccionados",
+              "value": "={{ $json.examenes_seleccionados }}",
+              "type": "array"
+            },
+            {
+              "id": "id-6",
+              "name": "fecha_ingreso",
+              "value": "={{ $now.format('dd/MM/yyyy HH:mm') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "69816759-fc19-40c7-8a0b-a36c016918f6",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "id"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "67bd5666-4453-4116-8c31-81ff5c256eec",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        2512
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "E3LE6K027Y5qmCpR",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pWbcsmDhysn7ELrRCiT483gmpfsvGTyCjugYQGp68kE",
+          "mode": "list",
+          "cachedResultName": "Historial Paciente Hospital Villarica",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pWbcsmDhysn7ELrRCiT483gmpfsvGTyCjugYQGp68kE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pacientes mes de Febrero",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pWbcsmDhysn7ELrRCiT483gmpfsvGTyCjugYQGp68kE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre_paciente": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+            "rut_paciente": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+            "prevision": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+            "edad": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }}",
+            "fecha_actual": "={{ $('Preparar Datos Paciente y Medico').item.json.metadatos.fecha_ingreso }}",
+            "medico_nombre": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+            "medico_rut": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+            "examenes_a_realizar": "={{ $json.examenes_seleccionados }}",
+            "apellido_paterno_paciente": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+            "apellido_materno_paciente": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "nombre_paciente",
+              "displayName": "nombre_paciente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "apellido_paterno_paciente",
+              "displayName": "apellido_paterno_paciente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "apellido_materno_paciente",
+              "displayName": "apellido_materno_paciente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "rut_paciente",
+              "displayName": "rut_paciente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "prevision",
+              "displayName": "prevision",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "edad",
+              "displayName": "edad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "complejidad",
+              "displayName": "complejidad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "medico_nombre",
+              "displayName": "medico_nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "medico_rut",
+              "displayName": "medico_rut",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "medico_especialidad",
+              "displayName": "medico_especialidad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha_actual",
+              "displayName": "fecha_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "examenes_a_realizar",
+              "displayName": "examenes_a_realizar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "83614de8-45c0-4740-b6ce-6a4f35338072",
+      "name": "Guardar Historial Pacientes",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1312,
+        1184
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "vCYm5pIoJUzQfSzB",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"nombre\": \"Juan\",\n  \"apellido_paterno_paciente\": \"Perez\",\n  \"apellido_Materno_paciente\":\"Roman\",\n  \"rut\": \"12.345.678-9\",\n  \"prevision\": \"Fonasa\",\n  \"edad\": \"45\",\n  \"fechanacimiento\": \"24/12/1998\",\n  \"complejidad\": \"Alta\"\n}"
+      },
+      "id": "9bf128dc-2877-45ec-bf86-e0360da7f5e4",
+      "name": "Parser Datos Estructurados",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        2512
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Extrae los datos del paciente del siguiente texto:\n\n{{ $('Formulario Ingreso Pacientes').item.json.datos_paciente }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Eres un asistente especializado en extraer datos de pacientes de texto no estructurado. Tu tarea es identificar y extraer información específica de pacientes del sistema de salud chileno: nombre, apellido paterno, apellido materno, RUT, fechanacimiento (formato chileno con puntos y guión), previsión de salud (Fonasa, Isapre, etc.), edad en años, y nivel de complejidad del caso (Alta, Media, Baja). Si algún dato no está presente en el texto, debes usar \"No especificado\" como valor. Debes ser preciso y mantener el formato correcto del RUT chileno.\n\n40 A 2 M 3 D cuando tengas patrones como este la A significa años la M significa mes y la D signfica dia cuando veas estos parametros quiero que me saques la fecha de nacimiento y la pongan en el output fechanacimiento"
+        }
+      },
+      "id": "e2bc4909-f527-4781-ade1-c20793f334fa",
+      "name": "Extraer Datos del Paciente",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        192,
+        2288
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1OLmOGgxe_sVJFVpkka86MszUSyXUyU8VQrU5UneRQKQ",
+          "mode": "list",
+          "cachedResultName": "SOLICITUD Y Consentimiento Informado de Test Multidrogas en Orina",
+          "cachedResultUrl": "https://docs.google.com/document/d/1OLmOGgxe_sVJFVpkka86MszUSyXUyU8VQrU5UneRQKQ/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Test Multidrogas",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1asNUbsg7mgDCPPDOWjFyRL1kRZ3aX_Ct",
+          "mode": "list",
+          "cachedResultName": "Test Multidrogas en Orina",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1asNUbsg7mgDCPPDOWjFyRL1kRZ3aX_Ct"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        800
+      ],
+      "id": "7c6c8264-3c96-447b-8f90-751099c8f913",
+      "name": "Copiar Archivo",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "examenes_seleccionados",
+              "value": "={{ $json.metadatos.examenes }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a9b3316b-3413-44ad-9bb8-a14ffcccfaa9",
+      "name": "Separar Array de Exámenes",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_01",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "a4697cea-5174-4e6b-9496-8d2b9d24ce0f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Test Multidrogas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_02",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "1271ffb1-abfe-479a-a368-29c6c5c55f57"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Solicitud de Examenes "
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_03",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "4b93d572-bff9-4276-a23e-a6efe8b943b8"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Biopsia"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_04",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "b3d8f443-f6e9-40d6-83a6-75cabdf485ed"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Test Respiratorio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_05",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "12a047fc-8c2f-4cbb-8a37-68cdce80cd9c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Biología Molecular"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_06",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "f4e6b603-ccaf-447d-b196-7fc21a24f69a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "VIH"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_07",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "e484a2db-acef-4f4e-87ec-9b4fb1b3ef5f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "TBC"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_08",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "cca2fe84-6f66-4560-b658-75b5d31f59e3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "HANTA"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_09",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "36d2d7bd-c0f8-4634-b8f5-392d5005a66d"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "TC"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_10",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "0bc44e7a-98eb-49f4-a836-2a1986a25baf"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Radiografía"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_11",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "6102f26e-7b6c-459e-b277-fd8d2344625a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "RNM"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_12",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "fe1322cf-2429-48af-807c-d0954d31452a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Transfusión"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.examenes_seleccionados }}",
+                    "rightValue": "exam_13",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "817728d5-6a50-4ff3-8df2-aba61bc33928"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Reserva Hemocomponentes"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "00689bd4-6b50-4172-bdaa-fbc27bd7ee12",
+      "name": "Enrutar por Tipo de Examen",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1536,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "examenes_seleccionados",
+        "options": {}
+      },
+      "id": "e5e14e16-5188-432c-aff6-b825a070cb5e",
+      "name": "Recorrer Exámenes Seleccionados",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        1376
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 1. Validamos que el ítem y la propiedad existan para evitar el error \"undefined\"\nconst rawData = item.json.datos_paciente_texto || \"\";\nconst fechaIngresoStr = item.json.fecha_ingreso || \"\";\n\n// Si no hay datos, devolvemos un objeto vacío pero estructurado para no romper el flujo\nif (!rawData) {\n    return { error: \"No se encontraron datos en datos_paciente_texto\" };\n}\n\n// 2. Separar por tabulaciones\nconst columns = rawData.split('\\t').map(col => col.trim());\n\n// 3. Procesar Nombres (Lógica: Nombre1 Nombre2 ApellidoP ApellidoM)\nconst fullParts = columns[0] ? columns[0].split(' ').filter(p => p.length > 0) : [];\nconst apellidoM = fullParts.length > 2 ? fullParts.pop() : \"No especificado\";\nconst apellidoP = fullParts.length > 1 ? fullParts.pop() : \"No especificado\";\nconst nombres = fullParts.join(' ') || \"No especificado\";\n\n// 4. Formatear RUT (Eliminar puntos, mantener guion)\nlet rutLimpio = (columns[1] || \"\").replace(/[^0-9kK]/g, '');\nlet rutFormateado = \"No especificado\";\nif (rutLimpio.length > 1) {\n    rutFormateado = `${rutLimpio.slice(0, -1)}-${rutLimpio.slice(-1).toUpperCase()}`;\n}\n\n// 5. Cálculo de Fecha de Nacimiento\nlet fechaNac = \"No especificado\";\nlet edadAnios = \"No especificado\";\nconst edadString = columns[6] || \"\"; \nconst matchEdad = edadString.match(/(\\d+)\\s*A\\s*(\\d+)\\s*M\\s*(\\d+)\\s*D/);\n\nif (matchEdad && fechaIngresoStr) {\n    try {\n        edadAnios = matchEdad[1];\n        const meses = parseInt(matchEdad[2]);\n        const dias = parseInt(matchEdad[3]);\n\n        // Parsear fecha de ingreso (DD/MM/YYYY HH:mm)\n        const partesFecha = fechaIngresoStr.split(' ')[0].split('/');\n        if (partesFecha.length === 3) {\n            let fechaReferencia = new Date(partesFecha[2], partesFecha[1] - 1, partesFecha[0]);\n            \n            fechaReferencia.setFullYear(fechaReferencia.getFullYear() - parseInt(edadAnios));\n            fechaReferencia.setMonth(fechaReferencia.getMonth() - meses);\n            fechaReferencia.setDate(fechaReferencia.getDate() - dias);\n\n            const dd = String(fechaReferencia.getDate()).padStart(2, '0');\n            const mm = String(fechaReferencia.getMonth() + 1).padStart(2, '0');\n            const yyyy = fechaReferencia.getFullYear();\n            fechaNac = `${dd}-${mm}-${yyyy}`;\n        }\n    } catch (e) {\n        fechaNac = \"Error en cálculo\";\n    }\n}\n\n// 6. Retornar el JSON estructurado final\nreturn {\n  paciente: {\n    nombre: nombres,\n    apellido_paterno: apellidoP,\n    apellido_materno: apellidoM,\n    rut: rutFormateado,\n    fechanacimiento: fechaNac,\n    prevision: columns[3] || \"No especificado\",\n    edad_anios: edadAnios\n  },\n  medico: {\n    nombre: item.json.nombre_medico || \"No especificado\",\n    rut: item.json.rut_medico || \"No especificado\"\n  },\n  metadatos: {\n    examenes: item.json.examenes_seleccionados || [],\n    fecha_ingreso: fechaIngresoStr,\n    modo: item.json.formMode || \"no-especificado\"\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        1280
+      ],
+      "id": "a66c38b4-3aac-447d-8d8a-f3889c0f2092",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "2b263a0c-8844-40a1-806c-b18abc7ceceb",
+              "name": "apellido_paterno_paciente",
+              "value": "=apellido_p{{ $json.paciente.apellido_paterno }}aterno_paciente }}",
+              "type": "string"
+            },
+            {
+              "id": "a244f0f1-cdca-4a19-ab77-a97c5cad6495",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "rut_paciente",
+              "value": "={{ $json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "prevision",
+              "value": "={{ $json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "edad",
+              "value": "={{ $json.paciente.edad_anios }}",
+              "type": "string"
+            },
+            {
+              "id": "b47579d9-4244-4f75-899d-bd94d6615dc5",
+              "name": "fechanacimiento",
+              "value": "={{ $json.paciente.fechanacimiento }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "fecha_registro",
+              "value": "={{ $json.metadatos.fecha_ingreso }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "19ca2825-aab6-45b8-9492-7b8f2283304a",
+      "name": "Preparar Datos Paciente y Medico",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.metadatos.fecha_ingreso }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7ba85d32-3466-4f09-8eb5-676906de6dd6",
+      "name": "Preparar Datos para Plantilla Test Multidrogas",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d484c4f6-8870-46aa-8aad-95b153dd3814",
+      "name": "Preparar Datos para plantilla examen biologia molecular",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1ukhCo4qwPduQd6YWmdTG_iwjTy7CxDg5MRxDKkpJRJs",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Examen Biología Molecular (2)",
+          "cachedResultUrl": "https://docs.google.com/document/d/1ukhCo4qwPduQd6YWmdTG_iwjTy7CxDg5MRxDKkpJRJs/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Solicitud de Transfusión ",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1c-Xkp4ZY38DpLH1Txt7Iw9j6ZvSfQIlR",
+          "mode": "list",
+          "cachedResultName": "Solicitud Examen Biología Molecular",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1c-Xkp4ZY38DpLH1Txt7Iw9j6ZvSfQIlR"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        992
+      ],
+      "id": "6caf41e8-0d70-4620-adab-8a0f8e4b9d38",
+      "name": "Copiar Archivo Examen Biologia Molecular",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "edadpaciente",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.edad }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "PREVISIONPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.prevision }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para Plantilla Test Multidrogas').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        800
+      ],
+      "id": "8b8ae321-aaba-48d5-a630-97ee6fb8cc8e",
+      "name": "Sobreescribir documento test multidrogas",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDAD",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.edad }} Años"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen biologia molecular').item.json.medico_nombre }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        992
+      ],
+      "id": "0e5063ec-7673-4b92-adea-9ec40d482a1c",
+      "name": "Sobreescribir documento examen biologia molecular",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1e0e9831-9356-419d-b30f-aa7dd718ee78",
+      "name": "Preparar Datos para plantilla examen VIH",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        1184
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1CWs3BSNWcIiAt1sj5zTqyNA2h0P1PgNkYTPkGEKp8rs",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Examen VIH (1)",
+          "cachedResultUrl": "https://docs.google.com/document/d/1CWs3BSNWcIiAt1sj5zTqyNA2h0P1PgNkYTPkGEKp8rs/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Examen de VIH ",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1_KVoIPdorkqhBnPvMcX2kMgVDuzULDRB",
+          "mode": "list",
+          "cachedResultName": "Examenes VIH",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1_KVoIPdorkqhBnPvMcX2kMgVDuzULDRB"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        1184
+      ],
+      "id": "b6d88807-2db7-43da-93cc-9b72cb39767a",
+      "name": "Copiar Archivo Examen VIH",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDAD",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.edad }} Años"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "RutMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen VIH').item.json.medico_rut }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        1184
+      ],
+      "id": "15520ce7-ca3e-4a1c-ab46-1dfacc096397",
+      "name": "Sobreescribir documento examen VIH",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3275cc13-ad9a-42db-9dd0-62a4ebd8e2de",
+      "name": "Preparar Datos para plantilla examen HANTA",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        1376
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1OF4Mh7guo-3_IYcPmQ0wJ_rfh3XEVoIpZItxqmmynQk",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Examen Hanta",
+          "cachedResultUrl": "https://docs.google.com/document/d/1OF4Mh7guo-3_IYcPmQ0wJ_rfh3XEVoIpZItxqmmynQk/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Examen de VIH ",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ZHObmRCYxbkJmV3DFv6cuiaSQ8h-FSMb",
+          "mode": "list",
+          "cachedResultName": "Formulario HANTA",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1ZHObmRCYxbkJmV3DFv6cuiaSQ8h-FSMb"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        1376
+      ],
+      "id": "32f186b0-65ec-476f-bdf2-154a4109c204",
+      "name": "Copiar Archivo Examen HANTA",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDADPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.edad }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "RutMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.medico_rut }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "previsionpaciente",
+              "replaceText": "={{ $('Preparar Datos para plantilla examen HANTA').item.json.prevision }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        1376
+      ],
+      "id": "18beef45-713c-4bcb-901f-194532cda59f",
+      "name": "Sobreescribir documento examen HANTA",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5dcf9579-ec37-4479-8ed0-bf7d4ab5652f",
+      "name": "Preparar Datos para plantilla inv. Tuberculosis",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        1568
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "17J9S8bqO76c4QQM0yF-hSMYMxn6zpSspns28sHLuYjI",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Investigación Bacteriológica de Tuberculosis",
+          "cachedResultUrl": "https://docs.google.com/document/d/17J9S8bqO76c4QQM0yF-hSMYMxn6zpSspns28sHLuYjI/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Examen de Investigacion por Tuberculosis",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Gdq4-k9FABHB1olz1OuuJVvONmeOYi2o",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Investigación Bacteriológica de Tuberculosis",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Gdq4-k9FABHB1olz1OuuJVvONmeOYi2o"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        1568
+      ],
+      "id": "0cbd21af-644b-44c7-b914-ff23d10796a4",
+      "name": "Copiar Archivo Examen inv. Tuberculosis",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDADPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.edad }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "RutMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla inv. Tuberculosis').item.json.medico_rut }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        1568
+      ],
+      "id": "1637cc9f-4fe2-4144-89aa-6b60cf633564",
+      "name": "Sobreescribir documento examen inv. Tuberculosis",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1f1e7a8f-da03-4544-aa7c-02449aec4f54",
+      "name": "Preparar Datos para plantilla Radiografia",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        1760
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDADPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.edad }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "RutMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Radiografia').item.json.medico_rut }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        1760
+      ],
+      "id": "a47119bb-5ebb-456a-9f55-f433c3633778",
+      "name": "Sobreescribir documento Solicitud Radiografia",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1AoEVN4-IYn4dhGmL8xe-wVYCTPo8ztu8uu2YzYNCAYw",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Radiografía (Hospital de Villarrica)",
+          "cachedResultUrl": "https://docs.google.com/document/d/1AoEVN4-IYn4dhGmL8xe-wVYCTPo8ztu8uu2YzYNCAYw/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Solicitud de Radiografia",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1serkd0Nd7L9Aq04X2_OLRHwLDLIKP7cm",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Radiografia",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1serkd0Nd7L9Aq04X2_OLRHwLDLIKP7cm"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        1760
+      ],
+      "id": "01c036fb-5a82-4af8-bff1-41f5c897eaa9",
+      "name": "Copiar Archivo Soliciutd Radiografia",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9c78500e-5df2-4199-9f1b-647a4e02c1d6",
+      "name": "Preparar Datos para plantilla Solicitud Examenes",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        1952
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1_JS-D8Bsxzm-GaretIZaATsC_tB6GY0x_2sY9FlKJHQ",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Examenes 2",
+          "cachedResultUrl": "https://docs.google.com/document/d/1_JS-D8Bsxzm-GaretIZaATsC_tB6GY0x_2sY9FlKJHQ/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Solicitud de Examenes",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Lq0_QcDhFsWbsvTYQ5Ii8bpbtWGmTkou",
+          "mode": "list",
+          "cachedResultName": "Solicitud de examenes (+ocupado)",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Lq0_QcDhFsWbsvTYQ5Ii8bpbtWGmTkou"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        1952
+      ],
+      "id": "94ced492-1403-4a29-b7af-d59dd3b093da",
+      "name": "Copiar Archivo Solicitud de Examenes",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDADPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.edad }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "RutMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.medico_rut }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "previsionpaciente",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes').item.json.prevision }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        1952
+      ],
+      "id": "548db5a6-72fc-48a3-874a-0a7ee0f516eb",
+      "name": "Sobreescribir documento Solicitud de Examenes",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2768,
+        1280
+      ],
+      "id": "7ef8670f-594b-4679-a54d-15595a440f11",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "nombre_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "apellido_paterno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_paterno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "apellido_materno_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.apellido_materno }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "rut_paciente",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "prevision",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.prevision }}",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "edad",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.edad_anios }} Años",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "medico_nombre",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "id-9",
+              "name": "medico_rut",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.medico.rut }}",
+              "type": "string"
+            },
+            {
+              "id": "id-11",
+              "name": "fecha_registro",
+              "value": "={{ $('Preparar Datos Paciente y Medico').item.json.fecha_registro }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ca68cdc1-8972-4db2-a439-00d03819577c",
+      "name": "Preparar Datos para plantilla Solicitud Examenes1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1760,
+        2128
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1qoFKSnuFMG8Xo-GtlrS4BpjiQ-5T1zHYY2IrK-JpaCk",
+          "mode": "list",
+          "cachedResultName": "Solicitud de TC (Hospital de Villarrica)",
+          "cachedResultUrl": "https://docs.google.com/document/d/1qoFKSnuFMG8Xo-GtlrS4BpjiQ-5T1zHYY2IrK-JpaCk/edit?usp=drivesdk"
+        },
+        "name": "=Paciente {{ $json.nombre_paciente }} {{ $json.apellido_paterno_paciente }} {{ $json.apellido_materno_paciente }} Solicitud de Examenes",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1r5nB0j3Gn4x77b7YPFkgFAdjNCRTKyE1",
+          "mode": "list",
+          "cachedResultName": "Solicitud TC",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1r5nB0j3Gn4x77b7YPFkgFAdjNCRTKyE1"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        2128
+      ],
+      "id": "d3396161-1c65-47c5-986c-2a4f113a659e",
+      "name": "Copiar Archivo Solicitud de Examenes1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "eYVIYC0vyfqLBJk8",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "RUTPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.rut_paciente }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "NOMBREPACIENTE",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.nombre_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOPATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.apellido_paterno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "APELLIDOMATERNO",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.apellido_materno_paciente }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "EDADP",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.edad }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "FechaSolicitud",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.fecha_registro }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "fechanacimiento",
+              "replaceText": "={{ $('Preparar Datos Paciente y Medico').item.json.paciente.fechanacimiento }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "NombreMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.medico_nombre }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "RutMedico",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.medico_rut }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "previsionpaciente",
+              "replaceText": "={{ $('Preparar Datos para plantilla Solicitud Examenes1').item.json.prevision }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        2128
+      ],
+      "id": "cc4b5892-2e1d-40ed-b019-4b80ac469709",
+      "name": "Sobreescribir documento Solicitud de Examenes1",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "s2GmDiGFlDZeENQq",
+          "name": "Google Docs account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Formulario Ingreso Pacientes": [
+      {
+        "json": {
+          "datos_paciente": "CAMILA LORENA ROMAN PILLADO\t16766300-1\t\tFONASA - D\tNO\tNO\t38 A 2 M 3 D",
+          "nombre_medico": "Crisitan Ramirez",
+          "rut_medico": "176007904",
+          "examenes_seleccionados": [
+            "exam_01 | Test multidrogas en orina",
+            "exam_09 | Solicitud de TC",
+            "exam_08 | Formulario HANTA"
+          ],
+          "submittedAt": "2026-03-09T11:42:32.333-03:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Formulario Ingreso Pacientes": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extraer Datos del Paciente",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Datos del Paciente": {
+      "main": [
+        []
+      ]
+    },
+    "Parser Datos Estructurados": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Extraer Datos del Paciente",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento test multidrogas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrutar por Tipo de Examen": {
+      "main": [
+        [
+          {
+            "node": "Preparar Datos para Plantilla Test Multidrogas",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos para plantilla Solicitud Examenes",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        [
+          {
+            "node": "Preparar Datos para plantilla examen biologia molecular",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos para plantilla examen VIH",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos para plantilla inv. Tuberculosis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos para plantilla examen HANTA",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos para plantilla Solicitud Examenes1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos para plantilla Radiografia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    "Separar Array de Exámenes": {
+      "main": [
+        [
+          {
+            "node": "Recorrer Exámenes Seleccionados",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Guardar Historial Pacientes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recorrer Exámenes Seleccionados": {
+      "main": [
+        [
+          {
+            "node": "Enrutar por Tipo de Examen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Preparar Datos Paciente y Medico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar Historial Pacientes": {
+      "main": [
+        []
+      ]
+    },
+    "Preparar Datos Paciente y Medico": {
+      "main": [
+        [
+          {
+            "node": "Separar Array de Exámenes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para Plantilla Test Multidrogas": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla examen biologia molecular": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Examen Biologia Molecular",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Examen Biologia Molecular": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento examen biologia molecular",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla examen VIH": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Examen VIH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Examen VIH": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento examen VIH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla examen HANTA": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Examen HANTA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Examen HANTA": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento examen HANTA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla inv. Tuberculosis": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Examen inv. Tuberculosis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Examen inv. Tuberculosis": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento examen inv. Tuberculosis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla Radiografia": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Soliciutd Radiografia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Soliciutd Radiografia": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento Solicitud Radiografia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla Solicitud Examenes": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Solicitud de Examenes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Solicitud de Examenes": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento Solicitud de Examenes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos para plantilla Solicitud Examenes1": {
+      "main": [
+        [
+          {
+            "node": "Copiar Archivo Solicitud de Examenes1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Archivo Solicitud de Examenes1": {
+      "main": [
+        [
+          {
+            "node": "Sobreescribir documento Solicitud de Examenes1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "0ca11b7a-cfc8-472a-a599-503b5575d206",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "31acbb922989282bc3a5fd2f3b4083cbfb98d627862d981ecf0e500938180ebe"
+  },
+  "id": "3mC30f4mj859ntZp",
+  "tags": []
+}
