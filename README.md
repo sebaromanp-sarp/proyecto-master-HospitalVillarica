@@ -69,5 +69,29 @@ CRISTIAN ALEJANDRO CAMPOS IRRIBARRA	15764390-1		FONASA - D	NO	NO	38 A 2 M 3 D	( 
 - **Contacto**: añadir correo o responsable del proyecto para soporte.
 
 ---
+Stack Tecnológico Ampliado: Ecosistema de Desarrollo y Ejecución
+El proyecto se construyó utilizando el modelo de desarrollo agil, con comunicacion directa con el personal del hospital villarica potenciado por Inteligencia Artificial Generativa y herramientas de Desarrollo de Software de Alto Rendimiento.
 
-_Archivo generado automáticamente a partir del flow `Proyecto Hospital Villarica copia (1).json`._
+1. Entorno de Desarrollo y Productividad (Local)
+Visual Studio Code (VS Code): Utilizado como el entorno de desarrollo integrado (IDE) principal para la escritura y depuración de los bloques de lógica personalizada en JavaScript.
+
+Uso específico: Escritura de los nodos de "Code" de n8n fuera del navegador para asegurar la calidad del código y el manejo de estructuras JSON complejas.
+
+Warp: Terminal de nueva generación basada en GPU con capacidades de IA.
+
+Uso específico: Gestión de la instancia de n8n (si es self-hosted), manejo de peticiones de red (curl) para probar los Webhooks del hospital y administración de control de versiones.
+
+2. Capa de Inteligencia Artificial (NLP & Code Assistance)
+OpenAI API (GPT-4o / GPT-3.5): El motor de procesamiento de lenguaje natural que actúa como el "traductor" entre el texto desordenado del HCE y los datos estructurados necesarios para los documentos clínicos. (luego cambie esta capa por un script en javascript porque la computacion de openIA se demoraba mucho y al ocupar el javascript pude optimizar unos 30 segundos).
+
+OpenAI Codex: Utilizado durante la fase de desarrollo para la asistencia en la escritura de scripts.
+
+Función: Aceleró la creación de las funciones lógicas en JavaScript que calculan la fecha de nacimiento exacta a partir de patrones complejos de edad (ej. "40 A 2 M 3 D"), garantizando precisión matemática en el flujo.
+
+3. Orquestador de Flujos (Backend Logic)
+n8n: El núcleo del proyecto que conecta todas las piezas. Permite que la información fluya desde el formulario inicial hasta la generación final del documento en Google Docs sin intervención manual.
+
+4. Gestión de Datos y Documentación (Cloud)
+Google Sheets API: Persistencia de datos y creación de un historial de pacientes auditable.
+
+Google Docs & Drive API: Automatización de plantillas y almacenamiento organizado de la documentación clínica generada.
